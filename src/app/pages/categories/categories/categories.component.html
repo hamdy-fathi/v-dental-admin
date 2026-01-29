@@ -1,0 +1,85 @@
+<app-table-wrapper
+  [headerTitle]="indexMeta.indexTitle"
+  [titleIcon]="indexMeta.indexIcon"
+  [headerBtnLabel]="indexMeta.createBtnLabel"
+  [columns]="indexMeta.columns"
+  [dataSource]="records()"
+  [loading]="isLoading()"
+  [displayCreateButton]="indexMeta.displayCreateButton"
+  [displayUpdateButton]="indexMeta.displayUpdateButton"
+  [displayDeleteButton]="indexMeta.displayDeleteButton"
+  [displayViewButton]="indexMeta.displayViewButton"
+  [totalRecords]="totalRecords()"
+  [recordsFiltered]="recordsFiltered()"
+  paginatorPosition="both"
+  [indexRole]="roles().index"
+  [updateBtnRole]="roles().update"
+  [createBtnRole]="roles().create"
+  [showViewBtnRole]="roles().show"
+  [deleteBtnRole]="roles().delete"
+  [displayFilterBtn]="indexMeta.displayFilterButton"
+  [(displayFilters)]="displayFilters"
+  [stateKey]="indexMeta.indexTableKey"
+  [globalFilterValue]="globalFilterValue()"
+  [reorderableColumns]="indexMeta.reorderableColumns ?? false"
+  [reorderableRows]="indexMeta.reorderableRows ?? false"
+  (createBtnClicked)="navigateCreatePage()"
+  (updateBtnClicked)="openUpdateRecordDialog($event)"
+  (deleteBtnClicked)="confirmDelete($event)"
+  (viewClicked)="openView($event)"
+  [withCustomFilters]="true"
+  [withAdditionalContent]="true"
+  (onLoadData)="loadRecords($event)"
+>
+  <ng-template #image let-category>
+    @if (category.image) {
+      <p-image
+        [src]="domainUrl + category.image"
+        [preview]="true"
+        alt="Image"
+        width="60"
+      >
+        <ng-template #indicator>
+          <i class="pi pi-search"></i>
+        </ng-template>
+        <ng-template #image>
+          <img [src]="domainUrl + category.image" alt="image" width="60" />
+        </ng-template>
+        <ng-template
+          #preview
+          let-style="style"
+          let-previewCallback="previewCallback"
+        >
+          <img
+            [src]="domainUrl + category.image"
+            alt="image"
+            [style]="style"
+            (click)="previewCallback()"
+          />
+        </ng-template>
+      </p-image>
+    }
+  </ng-template>
+
+  <ng-template #name let-category>
+    <span>
+      {{ getName(category) }}</span>
+  </ng-template>
+</app-table-wrapper>
+
+<p-dialog
+  [(visible)]="showView"
+  appendTo="body"
+  position="topright"
+  [showHeader]="false"
+  [draggable]="false"
+  [modal]="true"
+  [resizable]="false"
+  [focusOnShow]="true"
+  [closeOnEscape]="false"
+  styleClass="m-0 min-h-full border-none temporarily-hide-header"
+>
+  @if (showView()) {
+    <app-view-category [(isShowDialog)]="showView" [category]="recordView()" />
+  }
+</p-dialog>

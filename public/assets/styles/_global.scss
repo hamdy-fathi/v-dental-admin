@@ -1,0 +1,80 @@
+
+:root {
+  --high-index: 9999;
+  --sidebar-width: "32rem";
+  --scrollbar-width: 3px;
+  --field-height: 40px;
+  --font-family: "Poppins", sans-serif;
+  --azalove-border-radius: 6px;
+  --red-color: #f14726;
+  &[dir="rtl"] {
+    --font-family: "Cairo", sans-serif;
+  }
+}
+
+::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+  height: 5px;
+  width: 8px !important;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #fcfcfc;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #545454;
+  border-radius: 8px;
+}
+
+body {
+  text-align: start;
+  font-family: var(--font-family);
+  background-color: var(--azalove-surface-0);
+  color: var(--azalove-text-color);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(#000, 0);
+  margin: 0;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input:-webkit-autofill {
+  transition:
+    background-color 50000s ease-in-out,
+    color 50000s ease-in-out;
+}
+
+p {
+  margin: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0px;
+}

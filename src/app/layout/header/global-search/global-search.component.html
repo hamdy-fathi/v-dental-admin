@@ -1,0 +1,46 @@
+<div class="search-holder">
+  <ng-select
+    class="border-none shadow-nonw font-medium global-search-input"
+    [items]="items()"
+    [placeholder]="'search by product name or order' | translate"
+    [clearOnBackspace]="true"
+    bindLabel="label"
+    [trackByFn]="trackByFn"
+    [loading]="isLoading()"
+    (search)="searchTerm.set($event.term)"
+  >
+    <ng-template ng-option-tmp let-item="item" let-search="searchTerm">
+      <button
+        pButton
+        [text]="true"
+        class="w-full text-sm p-button-link p-0 outline-none cursor-pointer px-3 py-2 flex justify-content-start"
+        (click)="openDialog(item)"
+      >
+        <span> {{ item.label }}</span>
+      </button>
+    </ng-template>
+  </ng-select>
+</div>
+
+<p-dialog
+  [(visible)]="showView"
+  appendTo="body"
+  position="topright"
+  [showHeader]="false"
+  [draggable]="false"
+  [modal]="true"
+  [resizable]="false"
+  [focusOnShow]="true"
+  [closeOnEscape]="false"
+  [style]="{ width: '980px' }"
+  styleClass="m-0 min-h-full border-none temporarily-hide-header"
+>
+  @switch (type()) {
+    @case ("user") {
+      <app-show-customer
+        [customerId]="selectedId()"
+        [(isShowDialog)]="showView"
+      />
+    }
+  }
+</p-dialog>

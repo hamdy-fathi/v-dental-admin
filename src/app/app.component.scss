@@ -1,0 +1,15 @@
+.layout-wrapper {
+  height: 100vh;
+
+  .layout-main-container {
+    padding-inline-start: 0px;
+
+    transition:
+      padding-inline-start 0.3s ease,
+      padding-inline-end 0.3s ease;
+
+    @media (min-width: 1024px) {
+      padding-inline-start: var(--sidebar-width);
+    }
+  }
+}

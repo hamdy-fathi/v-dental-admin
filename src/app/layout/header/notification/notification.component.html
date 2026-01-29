@@ -1,0 +1,57 @@
+<button
+  pButton
+  (click)="op.toggle($event)"
+  pTooltip="Notifications"
+  tooltipPosition="bottom"
+  [class.notifications__active]="animateBell()"
+  class="notifications border-circle w-2rem h-2rem text-gray-500 text-2xl bg-transparent border-none outline-none"
+>
+  <span class="notifications__waves"></span>
+  <span class="notifications__waves" style="--delay: 0.75s"></span>
+  <span class="notifications__waves" style="--delay: 0.9s"></span>
+  <span class="notifications__waves" style="--delay: 1s"></span>
+  <div class="notifications__bell">
+    <span class="notifications__bot"></span>
+    <span class="notifications__badge"></span>
+  </div>
+</button>
+<p-popover #op appendTo="body" styleClass="notifications-panel">
+  <ng-template #content>
+    <header
+      class="header py-2 px-3 flex justify-content-between align-items-center gap-2 border-bottom-1 border-300"
+    >
+      <h2 class="text-base font-medium my-0">
+        Notifications
+        <span class="bg-primary text-xs px-2 py-1 border-round"> 10 </span>
+      </h2>
+    </header>
+    @if (notifications()) {
+      <ul class="content">
+        @for (item of notifications(); track $index) {
+          <li class="notification-item" style="--delay: {{ $index * 0.03 }}s">
+            <app-notification-item [item]="item" />
+          </li>
+        } @empty {
+          <li class="notification-item">
+            <span class="text-sm text-400">No notifications</span>
+          </li>
+        }
+      </ul>
+    } @else {
+      <ul class="list-none m-0 p-3">
+        @for (i of [] | range: 5; track $index) {
+          <li class="flex gap-2 align-items-center">
+            <p-skeleton size="2rem" />
+            <div class="flex-auto flex flex-column gap-1">
+              <p-skeleton width="80%" height="10px" />
+              <p-skeleton width="70%" height="8px" />
+            </div>
+          </li>
+          @if (!$last) {
+            <li><p-divider styleClass="my-2" /></li>
+          }
+        }
+      </ul>
+    }
+  </ng-template>
+</p-popover>

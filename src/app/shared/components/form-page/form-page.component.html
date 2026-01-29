@@ -1,0 +1,24 @@
+<div class="py-4 px-4">
+  @if (pageList$ | async) {
+    <h2 class="my-3 text-3xl text-600 capitalize">
+      {{ formTitle() }}
+    </h2>
+    <app-form
+      [fields]="fields()"
+      [model]="model"
+      [form]="createForm"
+      [submitButtonClass]="submitButtonClass()"
+      [resetButtonClass]="resetButtonClass()"
+      [submitBtnLoading]="isLoadingBtnSubmit()"
+      [isDisabled]="isDisabled()"
+      [showFormActions]="showFormActions()"
+      [showSubmitButton]="showSubmitButton()"
+      [showResetButton]="showResetButton()"
+      [footerFormClass]="footerFormClass()"
+      [buttonLabel]="submitLabel()"
+      (onSubmit)="createUpdateRecord()"
+    />
+  } @else {
+    <app-spinner></app-spinner>
+  }
+</div>

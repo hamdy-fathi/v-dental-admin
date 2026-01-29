@@ -1,0 +1,55 @@
+<app-table-wrapper
+  [headerTitle]="indexMeta.indexTitle"
+  [titleIcon]="indexMeta.indexIcon"
+  [headerBtnLabel]="indexMeta.createBtnLabel"
+  [columns]="indexMeta.columns"
+  [dataSource]="records()"
+  [loading]="isLoading()"
+  [displayCreateButton]="indexMeta.displayCreateButton"
+  [displayUpdateButton]="indexMeta.displayUpdateButton"
+  [displayDeleteButton]="indexMeta.displayDeleteButton"
+  [displayViewButton]="indexMeta.displayViewButton"
+  [totalRecords]="totalRecords()"
+  [recordsFiltered]="recordsFiltered()"
+  paginatorPosition="both"
+  [indexRole]="roles().index"
+  [updateBtnRole]="roles().update"
+  [createBtnRole]="roles().create"
+  [showViewBtnRole]="roles().show"
+  [deleteBtnRole]="roles().delete"
+  [displayFilterBtn]="indexMeta.displayFilterButton"
+  [(displayFilters)]="displayFilters"
+  [stateKey]="indexMeta.indexTableKey"
+  [globalFilterValue]="globalFilterValue()"
+  [reorderableColumns]="indexMeta.reorderableColumns ?? false"
+  [reorderableRows]="indexMeta.reorderableRows ?? false"
+  (deleteBtnClicked)="confirmDelete($event)"
+  (viewClicked)="openView($event)"
+  [withCustomFilters]="true"
+  [withAdditionalContent]="true"
+  (onLoadData)="loadRecords($event)"
+>
+  <ng-template #customFiltersTemplate>
+    <app-contacts-filters
+      [displayFilters]="displayFilters()"
+      [(filtersData)]="filtersData"
+    />
+  </ng-template>
+</app-table-wrapper>
+
+<p-dialog
+  [(visible)]="showView"
+  appendTo="body"
+  position="topright"
+  [showHeader]="false"
+  [draggable]="false"
+  [modal]="true"
+  [resizable]="false"
+  [focusOnShow]="true"
+  [closeOnEscape]="false"
+  styleClass="m-0 min-h-full border-none temporarily-hide-header"
+>
+  @if (showView()) {
+    <app-view-contact [(isShowDialog)]="showView" [contact]="recordView()" />
+  }
+</p-dialog>

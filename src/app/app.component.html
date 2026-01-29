@@ -1,0 +1,44 @@
+<ngx-loading-bar
+  color="var(--azalove-primary-600)"
+  ref="http"
+  height="5px"
+  diameter="18px"
+  [includeSpinner]="false"
+/>
+
+<p-toast position="top-right" />
+
+<p-confirmpopup #confirmPopup>
+  <ng-template #headless let-message>
+    <div class="border-round p-3">
+      <span class="flex align-items-center gap-2">
+        <i class="pi pi-exclamation-circle text-yellow-500"></i>
+        <span class="font-semibold">{{ message.header }}</span>
+      </span>
+      <div class="w-full flex align-items-center gap-2 mt-3">
+        <button
+          pButton
+          class="flex-1 py-1"
+          [label]="'yes' | translate"
+          (click)="confirmPopup.onAccept()"
+        ></button>
+        <button
+          pButton
+          class="p-button-outlined flex-1 py-1"
+          [label]="'no' | translate"
+          (click)="confirmPopup.onReject()"
+        ></button>
+      </div>
+    </div>
+  </ng-template>
+</p-confirmpopup>
+
+<app-confirm-dialog />
+
+<div class="layout-wrapper">
+  <app-sidebar />
+
+  <div class="layout-main-container">
+    <router-outlet />
+  </div>
+</div>

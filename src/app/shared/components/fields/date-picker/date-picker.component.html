@@ -1,0 +1,117 @@
+<div class="p-field">
+  @if (props.description) {
+    <p class="mb-3 text-xs">{{ props.description }}</p>
+  }
+
+  @if (props.withPresets) {
+    <div [class]="'date-slider ' + (forceDisplay() ? 'mb-3' : '')">
+      <p-tabs [scrollable]="true">
+        <p-tablist>
+          <p-tab>
+            <p-button
+              type="button"
+              size="small"
+              [outlined]="true"
+              styleClass="border-round-3xl text-xs"
+              severity="primary"
+              icon="pi pi-calendar"
+              [label]="'set_date_on_calendar' | translate"
+              (onClick)="forceDisplay.set(true); activeIndex.set(-1)"
+            />
+          </p-tab>
+          @for (item of presetItems(); track $index) {
+            <p-tab>
+              <p-button
+                type="button"
+                size="small"
+                styleClass="border-round-3xl text-xs"
+                severity="success"
+                [outlined]="activeIndex() !== $index"
+                [label]="item.label"
+                (onClick)="handlePresetClick($index, item.amount, item.unit)"
+              />
+            </p-tab>
+          }
+        </p-tablist>
+      </p-tabs>
+    </div>
+  }
+
+  @if (!props.withPresets || forceDisplay()) {
+    <p-floatlabel variant="on">
+      <p-datepicker
+        roundMinute
+        #datePicker
+        [formControl]="formControl"
+        [formlyAttributes]="field"
+        [placeholder]="props.placeholder ?? ''"
+        [defaultDate]="props.defaultDate ?? null"
+        [dateFormat]="props.dateFormat ?? 'yy-mm-dd'"
+        [showClear]="props.showClear"
+        [hourFormat]="props.hourFormat ?? '12'"
+        [selectionMode]="props.selectionMode ?? 'single'"
+        rangeSeparator="/"
+        [required]="props.required ?? false"
+        [minDate]="props.minDate ?? null"
+        [maxDate]="props.maxDate ?? null"
+        [disabledDates]="props.disabledDates ?? null"
+        [disabledDays]="props.disabledDays ?? null"
+        [stepMinute]="5"
+        [showIcon]="props.showIcon ?? true"
+        [showButtonBar]="false"
+        [showTime]="props.showTime ?? false"
+        [hideOnDateTimeSelect]="props.showTime ? false : true"
+        [showSeconds]="props.showSeconds ?? false"
+        [showOtherMonths]="props.showOtherMonths ?? true"
+        [selectOtherMonths]="props.selectOtherMonths ?? false"
+        [inline]="props.inline"
+        [numberOfMonths]="props.numberOfMonths ?? 1"
+        dataType="string"
+        [appendTo]="props.appendTo ?? 'body'"
+        [touchUI]="props.touchUI ?? false"
+        [styleClass]="props.styleClass"
+        (onClearClick)="onClearClick($event)"
+      >
+        <ng-template #footer>
+          <div class="p-datepicker-buttonbar">
+            <p-button
+              size="small"
+              [text]="true"
+              [label]="datePicker.getTranslation('today')"
+              (onClick)="datePicker.onTodayButtonClick($event)"
+            />
+            <p-button
+              size="small"
+              [text]="true"
+              [label]="datePicker.getTranslation('clear')"
+              (onClick)="datePicker.onClearButtonClick($event)"
+            />
+            @if (props.showTime) {
+              <p-button
+                size="small"
+                class="ml-auto"
+                [label]="datePicker.getTranslation('apply')"
+                (onClick)="datePicker.hideOverlay()"
+              />
+            }
+          </div>
+        </ng-template>
+      </p-datepicker>
+
+      @if (props.label) {
+        <label [ngClass]="props.labelClass">
+          {{ props.label }}
+          @if (props.required && props.hideRequiredMarker !== true) {
+            <span class="text-red">*</span>
+          }
+        </label>
+      }
+    </p-floatlabel>
+  }
+
+  @if (showError && formControl.errors) {
+    <small role="alert" class="error-msg">
+      <formly-validation-message [field]="field" />
+    </small>
+  }
+</div>

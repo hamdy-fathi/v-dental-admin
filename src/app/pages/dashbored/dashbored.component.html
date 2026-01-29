@@ -1,0 +1,66 @@
+    <div class="grid">
+      @for (card of stats(); track card.title) {
+        <div class="md:col-4 col-12">
+          <p-card
+            styleClass="h-full stat-card hover:shadow-lg transition-all duration-300 cursor-pointer"
+            [style]="{ 'border-left': '4px solid var(--primary-color)' }"
+          >
+            <div class="flex flex-column gap-3">
+              <!-- Card Header -->
+              <div class="flex align-items-center justify-content-between">
+                <div class="flex align-items-center gap-2">
+                  <div
+                    class="w-3rem h-3rem border-round flex align-items-center justify-content-center text-white"
+                    [ngStyle]="{ 'background-color': card.color }"
+                  >
+                    <i [class]="card.icon" class="text-xl"></i>
+                  </div>
+                  <span class="text-sm text-gray-600 font-medium">
+                    {{ card.title }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Card Value -->
+              <div class="flex flex-column gap-1">
+                <span class="text-3xl font-bold text-gray-800">
+                  @if (card.title.includes("Revenue")) {
+                    ${{ card.value | number: "1.0-0" }}
+                  } @else if (card.title.includes("Avg")) {
+                    {{ card.value | number: "1.1-1" }}
+                  } @else {
+                    {{ card.value | number: "1.0-0" }}
+                  }
+                </span>
+
+                <!-- Trend Indicator -->
+                @if (card.trend !== undefined) {
+                  <div class="flex align-items-center gap-1">
+                    <i
+                      [class]="
+                        card.trend >= 0
+                          ? 'pi pi-arrow-up text-green-500'
+                          : 'pi pi-arrow-down text-red-500'
+                      "
+                      class="text-sm"
+                    ></i>
+                    <span
+                      [class]="
+                        card.trend >= 0 ? 'text-green-500' : 'text-red-500'
+                      "
+                      class="text-sm font-medium"
+                    >
+                      {{ card.trend >= 0 ? "+" : ""
+                      }}{{ card.trend | number: "1.1-1" }}%
+                    </span>
+                    <span class="text-xs text-gray-500 ml-2">
+                      {{ card.trendText }}
+                    </span>
+                  </div>
+                }
+              </div>
+            </div>
+          </p-card>
+        </div>
+      }
+    </div>

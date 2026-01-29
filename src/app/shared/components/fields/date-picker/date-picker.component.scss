@@ -1,0 +1,36 @@
+:host ::ng-deep .date-slider {
+  .p-tabs {
+    .p-tablist {
+      gap: 5px;
+      .p-tablist-nav-button {
+        position: static !important;
+        height: auto;
+        background-color: var(--surface-0);
+        .p-ink {
+          display: none !important;
+        }
+        &:hover {
+          box-shadow:
+            0 3px 1px -2px rgba(#000, 0.2),
+            0 2px 2px 0 rgba(#000, 0.14),
+            0 1px 5px 0 rgba(#000, 0.12);
+        }
+      }
+      .p-tablist-tab-list {
+        gap: 4px;
+        background-color: transparent;
+        border: 0;
+        padding-block: 0.5rem;
+
+        .p-tab {
+          padding: 0;
+          border: 0;
+
+          .p-ink {
+            display: none !important;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+<p-card styleClass="border-bottom-3 border-primary">
+  @if (!loadingScreen()) {
+    <div class="flex align-items-center gap-2 mb-3">
+      <i class="fas fa-cog text-primary text-xl"></i>
+      <h2 class="font-semibold capitalize text-lg line-height-2 m-0">
+        {{ "General Settings" | translate }}
+      </h2>
+    </div>
+
+    <p-divider />
+
+    <form class="mt-6 w-full" [formGroup]="generalSettingsForm" (ngSubmit)="update()">
+      <div class="grid w-full">
+        <formly-form
+          class="w-full"
+          [model]="model"
+          [fields]="fields"
+          [form]="generalSettingsForm"
+        />
+      </div>
+
+      <div class="pt-4 border-top-1 border-300 flex justify-content-end gap-2">
+        <button
+          pButton
+          pRipple
+          type="button"
+          class="capitalize text-base p-button-sm p-button-outlined p-button-secondary"
+          [label]="'cancel' | translate"
+          (click)="generalSettingsForm.reset()"
+        ></button>
+        <button
+          pButton
+          pRipple
+          type="submit"
+          class="capitalize text-base p-button-sm p-button-success w-13rem bg-primary-color border-none shadow-none"
+          [loading]="submitBtnLoading()"
+          [disabled]="generalSettingsForm.invalid"
+          [label]="'save changes' | translate"
+        ></button>
+      </div>
+    </form>
+  } @else {
+    <div
+      class="flex justify-content-center align-items-center"
+      style="min-height: 200px"
+    >
+      <app-spinner />
+    </div>
+  }
+</p-card>

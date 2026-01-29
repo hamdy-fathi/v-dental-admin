@@ -1,0 +1,12 @@
+@if (displayFilters()) {
+  <div class="my-3" [ngClass]="{ hide: !displayFilters() }">
+    <form [formGroup]="form">
+      <formly-form
+        [model]="model"
+        [fields]="fields"
+        [form]="form"
+        [options]="options"
+      />
+    </form>
+  </div>
+}

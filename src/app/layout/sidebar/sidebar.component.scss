@@ -1,0 +1,34 @@
+::ng-deep {
+  .p-drawer.sidebar {
+    border: none;
+    transition:
+      width 0.2s linear,
+      left 0.2s ease-in;
+    will-change: width;
+    opacity: 1 !important;
+    transform: none !important;
+
+    @media (min-width: 992px) {
+      width: var(--sidebar-width);
+    }
+    .p-drawer-content {
+      .p-accordion {
+        .p-accordionpanel {
+          margin-bottom: 25px;
+          border: none;
+        }
+        .p-accordionheader {
+          padding-block: 10px;
+          text-transform: uppercase;
+        }
+      }
+    }
+    &.logged-out {
+      .p-drawer-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}

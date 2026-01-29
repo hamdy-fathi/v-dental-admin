@@ -1,0 +1,105 @@
+:host ::ng-deep {
+  .p-datepicker-panel {
+    position: static !important;
+  }
+
+  // Calendar styles
+  .calendar-card {
+    .p-calendar {
+      .p-calendar-w-btn {
+        .p-datepicker-trigger {
+          background: var(--primary-color);
+          border-color: var(--primary-color);
+
+          &:hover {
+            background: var(--primary-600);
+            border-color: var(--primary-600);
+          }
+        }
+      }
+    }
+
+    .p-calendar-inline {
+      .p-datepicker {
+        border: 1px solid var(--surface-border);
+        border-radius: var(--border-radius);
+        box-shadow: var(--card-shadow);
+
+        .p-datepicker-header {
+          background: var(--surface-card);
+          border-bottom: 1px solid var(--surface-border);
+
+          .p-datepicker-title {
+            .p-datepicker-year,
+            .p-datepicker-month {
+              font-weight: 600;
+              color: var(--text-color);
+            }
+          }
+
+          .p-datepicker-prev,
+          .p-datepicker-next {
+            background: var(--surface-card);
+            border: 1px solid var(--surface-border);
+            color: var(--text-color);
+
+            &:hover {
+              background: var(--surface-hover);
+              border-color: var(--primary-color);
+              color: var(--primary-color);
+            }
+          }
+        }
+
+        .p-datepicker-calendar {
+          .p-datepicker-today {
+            background: var(--primary-50);
+            color: var(--primary-color);
+            font-weight: 600;
+          }
+
+          .p-datepicker-day {
+            &:hover {
+              background: var(--surface-hover);
+            }
+
+            &.p-highlight {
+              background: var(--primary-color);
+              color: var(--primary-color-text);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Event list styles
+  .event-item {
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  // Status badges
+  .status-badge {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    text-transform: capitalize;
+  }
+
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    .calendar-card {
+      .grid {
+        .col-12 {
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+}

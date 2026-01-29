@@ -1,0 +1,54 @@
+::ng-deep {
+  .layout-header {
+    position: sticky;
+    z-index: var(--z-index-1100);
+    inset-inline-start: 0;
+    top: 0;
+    width: 100%;
+    background-color: var(--azalove-surface-0);
+    padding-inline-end: 1rem;
+    box-shadow: 0px 4px 6px -5px rgba(0, 0, 0, 0.35);
+    transition: padding-inline-start 0.3s linear;
+    padding-inline: 30px;
+    padding-block: 15px;
+    z-index: 20;
+  }
+
+  .custom-button-menu {
+    button {
+      flex-direction: row-reverse;
+      background-color: var(--azalove-primary-900);
+      border-radius: 30px;
+      padding-inline: 30px;
+    }
+  }
+
+  .custom-split-style-button-avatar {
+    display: flex;
+
+    .p-splitbutton-button {
+      padding: 0px;
+      background-color: transparent;
+      border: none;
+    }
+
+    .p-splitbutton-dropdown {
+      padding: 0px;
+      background-color: transparent;
+      border: none;
+      color: var(--azalove-surface-900);
+    }
+  }
+
+  .question-btn {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 18px;
+  }
+
+  .custonm-splitbutton {
+    .p-splitbutton-button {
+      width: 8rem;
+    }
+  }
+}

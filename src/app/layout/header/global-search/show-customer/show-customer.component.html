@@ -1,0 +1,5 @@
+@if (!isLoading()) {
+  <app-view-customer [customer]="customer()" [(isShowDialog)]="isShowDialog" />
+} @else {
+  <app-spinner />
+}

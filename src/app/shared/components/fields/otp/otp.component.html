@@ -1,0 +1,19 @@
+@if (props.label) {
+  <label [ngClass]="props.labelClass">
+    {{ props.label }}
+    @if (props.required && props.hideRequiredMarker !== true) {
+      <span class="text-red">*</span>
+    }
+  </label>
+}
+
+<p-inputotp
+  [formControl]="formControl"
+  [formlyAttributes]="field"
+  [mask]="false"
+  [integerOnly]="true"
+  [length]="props.lenghtOtp ?? 6"
+  [size]="props.size ?? 'large'"
+  (onChange)="props.change && props.change(field, $event)"
+  [styleClass]="props.styleClass"
+/>
