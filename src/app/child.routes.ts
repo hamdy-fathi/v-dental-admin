@@ -1,5 +1,6 @@
 import { Route } from '@angular/router';
 import { blogRoutes } from '@pages/blogs/blog.routes';
+import { beforeAfterRoutes } from '@pages/before-after/before-after.routes';
 import { CategoriesRoutes } from '@pages/categories/categories.routes';
 import { generalSettingsRoutes } from '@pages/general-settings/general-settings.routes';
 import { sectionBranchesRoutes } from '@pages/section-branches/section-branches.routes';
@@ -17,6 +18,7 @@ export default [
   ...sectionOneRoutes,
   ...sectionTwoRoutes,
   ...blogRoutes,
+  ...beforeAfterRoutes,
   ...CategoriesRoutes,
   ...sectionThreeRoutes,
   ...sectionFourRoutes,

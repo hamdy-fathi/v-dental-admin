@@ -1,0 +1,43 @@
+<app-view-dialog
+  [(showDialog)]="isShowDialog"
+  [title]="'Before/After Case' | translate"
+  [data]="list()"
+>
+</app-view-dialog>
+
+<div class="grid">
+  <div class="col-12 md:col-6">
+    <h3 class="text-xl">{{ "Before" | translate }}</h3>
+    @if (beforeAfter().before) {
+      <p-image
+        [src]="domainUrl + beforeAfter().before"
+        [preview]="true"
+        alt="Before"
+        width="100%"
+        class="block"
+      >
+        <ng-template #indicator>
+          <i class="pi pi-search"></i>
+        </ng-template>
+      </p-image>
+    }
+  </div>
+
+  <div class="col-12 md:col-6">
+    <h3 class="text-xl">{{ "After" | translate }}</h3>
+    @if (beforeAfter().after) {
+      <p-image
+        [src]="domainUrl + beforeAfter().after"
+        [preview]="true"
+        alt="After"
+        width="100%"
+        class="block"
+      >
+        <ng-template #indicator>
+          <i class="pi pi-search"></i>
+        </ng-template>
+      </p-image>
+    }
+  </div>
+</div>
+
