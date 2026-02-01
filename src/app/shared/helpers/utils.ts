@@ -100,14 +100,22 @@ const userSettings = localStorageSignal({ theme: "light", lang: "en" }, "user-se
 
 export function resolveMediaUrl(path?: string | null): string {
   if (!path) return '';
-  if (/^https?:\/\//i.test(path)) return path;
+  if (/^https?:\/\//i.test(path)) {
+    // If it's already a full URL, remove /api from uploads path if present
+    return path.replace(/\/api\/uploads\//, '/uploads/');
+  }
 
   const normalized = path.startsWith('/') ? path.slice(1) : path;
   const apiBase = environment.API_URL.replace(/\/$/, '');
+  const apiRoot = apiBase.replace(/\/api$/, '');
   const domainBase = environment.Domain_URL.replace(/\/$/, '');
 
-  if (normalized.startsWith('uploads/') || normalized.startsWith('upload/')) {
-    return `${apiBase}/${normalized}`;
+  // Remove /api/ prefix if present in the path
+  const cleanPath = normalized.replace(/^api\/uploads\//, 'uploads/').replace(/^api\/upload\//, 'upload/');
+
+  if (cleanPath.startsWith('uploads/') || cleanPath.startsWith('upload/')) {
+    // Uploads are served from the root domain, not /api
+    return `${apiRoot}/${cleanPath}`;
   }
 
   return `${domainBase}/${normalized}`;
