@@ -1,4 +1,5 @@
 import { WritableSignal, signal } from '@angular/core';
+import { environment } from '@env';
 import * as CryptoJS from 'crypto-js';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 
@@ -96,3 +97,18 @@ export function localStorageSignal<T>(
 /* Usage:
 const userSettings = localStorageSignal({ theme: "light", lang: "en" }, "user-settings");
 // Any changes made to userSettings via userSettings.set() will automatically update localStorage. */
+
+export function resolveMediaUrl(path?: string | null): string {
+  if (!path) return '';
+  if (/^https?:\/\//i.test(path)) return path;
+
+  const normalized = path.startsWith('/') ? path.slice(1) : path;
+  const apiBase = environment.API_URL.replace(/\/$/, '');
+  const domainBase = environment.Domain_URL.replace(/\/$/, '');
+
+  if (normalized.startsWith('uploads/') || normalized.startsWith('upload/')) {
+    return `${apiBase}/${normalized}`;
+  }
+
+  return `${domainBase}/${normalized}`;
+}

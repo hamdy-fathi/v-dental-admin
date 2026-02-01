@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { marker as _ } from '@biesbjerg/ngx-translate-extract-marker';
-import { environment } from '@env';
+import { resolveMediaUrl } from '@shared';
 import { TranslateModule } from '@ngx-translate/core';
 import { BaseIndexComponent, TableWrapperComponent } from '@shared';
 import { LazyLoadEvent } from 'primeng/api';
@@ -40,7 +40,7 @@ export default class BeforeAfterComponent extends BaseIndexComponent<BeforeAfter
   beforeImage = viewChild.required<TemplateRef<any>>('beforeImage');
   afterImage = viewChild.required<TemplateRef<any>>('afterImage');
   description = viewChild.required<TemplateRef<any>>('description');
-  domainUrl = environment.Domain_URL;
+  mediaUrl = resolveMediaUrl;
 
   ngOnInit() {
     this.dialogComponent = CuBeforeAfterDialogComponent;

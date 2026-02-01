@@ -10,7 +10,7 @@
     <h3 class="text-xl">{{ "Before" | translate }}</h3>
     @if (beforeAfter().before) {
       <p-image
-        [src]="domainUrl + beforeAfter().before"
+        [src]="mediaUrl(beforeAfter().before)"
         [preview]="true"
         alt="Before"
         width="100%"
@@ -27,7 +27,7 @@
     <h3 class="text-xl">{{ "After" | translate }}</h3>
     @if (beforeAfter().after) {
       <p-image
-        [src]="domainUrl + beforeAfter().after"
+        [src]="mediaUrl(beforeAfter().after)"
         [preview]="true"
         alt="After"
         width="100%"

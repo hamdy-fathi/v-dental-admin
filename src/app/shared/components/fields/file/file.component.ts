@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { environment } from '@env';
+import { resolveMediaUrl } from '@shared';
 import { FieldType, FieldTypeConfig, FormlyModule } from '@ngx-formly/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
@@ -33,8 +34,6 @@ import { constants } from 'src/app/shared/config';
 })
 export class FileFieldComponent extends FieldType<FieldTypeConfig> {
   #sanitizer = inject(DomSanitizer);
-  domain = environment.Domain_URL;
-
   fileUploader = viewChild.required<FileUpload>('fileUploader');
 
   selectedFile = signal<any>(null);
@@ -47,7 +46,7 @@ export class FileFieldComponent extends FieldType<FieldTypeConfig> {
   ngOnInit() {
     const value = this.formControl?.value;
     if (this.props.mode === 'update' && value) {
-      this.mediaFile.set(this.domain + value);
+      this.mediaFile.set(resolveMediaUrl(value));
     }
   }
 

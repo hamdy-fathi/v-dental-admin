@@ -15,6 +15,7 @@ import { DropzoneConfigInterface, DropzoneModule } from 'ngx-dropzone-wrapper';
 import { ButtonModule } from 'primeng/button';
 import { ImageModule } from 'primeng/image';
 import { AuthService } from 'src/app/shared/services';
+import { resolveMediaUrl } from '@shared';
 
 @Component({
   selector: 'formly-multi-files-field',
@@ -32,8 +33,6 @@ import { AuthService } from 'src/app/shared/services';
 export class MultiFilesFieldComponent extends FieldType<FieldTypeConfig> {
   #config = inject(PrimeNG);
   #auth = inject(AuthService);
-  domain = environment.Domain_URL;
-
   uploadedFiles = signal<{ original_name: string; name: string }[]>([]);
   mediaFiles = signal<string[]>([]);
 
@@ -77,7 +76,7 @@ export class MultiFilesFieldComponent extends FieldType<FieldTypeConfig> {
     const mediaAccessKey = this.props?.mediaAccessKey ?? 'featuredImages';
     const media = this.field.model?.[mediaAccessKey];
     if (this.props.mode === 'update' && media && media.length > 0) {
-      this.mediaFiles.set(media.map((m: string) => this.domain + m));
+      this.mediaFiles.set(media.map((m: string) => resolveMediaUrl(m)));
       this.uploadedFiles.set(media.map((m: string) => ({ original_name: m, name: m })));
     }
   }

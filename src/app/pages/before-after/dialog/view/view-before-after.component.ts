@@ -6,9 +6,8 @@ import {
   model,
 } from '@angular/core';
 import { marker as _ } from '@biesbjerg/ngx-translate-extract-marker';
-import { environment } from '@env';
 import { TranslateModule } from '@ngx-translate/core';
-import { ViewDialogComponent } from '@shared';
+import { resolveMediaUrl, ViewDialogComponent } from '@shared';
 import { ImageModule } from 'primeng/image';
 import { BeforeAfterCase } from '../../services/services-type';
 
@@ -22,7 +21,7 @@ import { BeforeAfterCase } from '../../services/services-type';
 export class ViewBeforeAfterComponent {
   isShowDialog = model(false);
   beforeAfter = input.required<BeforeAfterCase>();
-  domainUrl = environment.Domain_URL;
+  mediaUrl = resolveMediaUrl;
 
   list = computed<
     { label: string; value: any; hasToolTip?: boolean; type?: string }[]
