@@ -85,12 +85,7 @@ export default class BeforeAfterComponent extends BaseIndexComponent<BeforeAfter
           orderable: false,
           render: this.description(),
         },
-        {
-          title: this.#translate(_('Created At')),
-          name: 'createdAt',
-          searchable: false,
-          orderable: false,
-        },
+   
       ],
     };
 
